@@ -57,3 +57,4 @@ local function receiveppdata( length )
 	end
 end
 --net.Receive("simfphys_send_ppdata", receiveppdata)
+-- Disabled as it causes unnecessary netspam while seemingly not doing anything 
