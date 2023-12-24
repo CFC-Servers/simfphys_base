@@ -27,7 +27,7 @@ function ENT:Think()
 
 	selfTable.RunNext = selfTable.RunNext or 0
 	if selfTable.RunNext < curtime then
-		self:ManageEffects( Active, Throttle, LimitRPM )
+		self:ManageEffects( Active, Throttle, LimitRPM, selfTable )
 		self:CalcFlasher()
 
 		selfTable.RunNext = curtime + 0.06
@@ -134,45 +134,43 @@ function ENT:GetRPM()
 	return RPM
 end
 
-function ENT:DamageEffects()
+function ENT:DamageEffects( selfTable )
 	local Pos = self:GetEnginePos()
 	local Scale = self:GetCurHealth() / self:GetMaxHealth()
 	local smoke = self:OnSmoke() and Scale <= 0.5
 	local fire = self:OnFire()
 
-	if self.wasSmoke ~= smoke then
-		self.wasSmoke = smoke
+	if selfTable.wasSmoke ~= smoke then
+		selfTable.wasSmoke = smoke
 		if smoke then
-			self.smokesnd = CreateSound(self, "ambient/gas/steam2.wav")
-			self.smokesnd:PlayEx(0.2,90)
+			selfTable.smokesnd = CreateSound(self, "ambient/gas/steam2.wav")
+			selfTable.smokesnd:PlayEx(0.2,90)
 		else
-			if self.smokesnd then
-				self.smokesnd:Stop()
+			if selfTable.smokesnd then
+				selfTable.smokesnd:Stop()
 			end
 		end
 	end
 
-	if self.wasFire ~= fire then
-		self.wasFire = fire
+	if selfTable.wasFire ~= fire then
+		selfTable.wasFire = fire
 		if fire then
 			self:EmitSound( "ambient/fire/mtov_flame2.wav" )
 
-			self.firesnd = CreateSound(self, "ambient/fire/fire_small1.wav")
-			self.firesnd:Play()
+			selfTable.firesnd = CreateSound(self, "ambient/fire/fire_small1.wav")
+			selfTable.firesnd:Play()
 		else
-			if self.firesnd then
-				self.firesnd:Stop()
+			if selfTable.firesnd then
+				selfTable.firesnd:Stop()
 			end
 		end
 	end
 
-	if smoke then
-		if Scale <= 0.5 then
-			local effectdata = EffectData()
-				effectdata:SetOrigin( Pos )
-				effectdata:SetEntity( self )
-			util.Effect( "simfphys_engine_smoke", effectdata )
-		end
+	if smoke and Scale <= 0.5 then
+		local effectdata = EffectData()
+		    effectdata:SetOrigin( Pos )
+            effectdata:SetEntity( self )
+        util.Effect( "simfphys_engine_smoke", effectdata )
 	end
 
 	if fire then
@@ -183,17 +181,17 @@ function ENT:DamageEffects()
 	end
 end
 
-function ENT:ManageEffects( Active, fThrottle, LimitRPM )
-	self:DamageEffects()
+function ENT:ManageEffects( Active, fThrottle, LimitRPM, selfTable )
+	self:DamageEffects( selfTable )
 
 	Active = Active and self:GetFlyWheelRPM() ~= 0
 	if not Active then return end
-	if not self.ExhaustPositions then return end
+	if not selfTable.ExhaustPositions then return end
 
 	local Scale = fThrottle * ( 0.2 + math.min( self:GetRPM() / LimitRPM, 1 ) * 0.8 ) ^ 2
 
-	for i = 1, #self.ExhaustPositions do
-		local positions = self.ExhaustPositions[i]
+	for i = 1, #selfTable.ExhaustPositions do
+		local positions = selfTable.ExhaustPositions[i]
 		if positions.OnBodyGroups then
 			if self:BodyGroupIsValid( positions.OnBodyGroups ) then
 				local effectdata = EffectData()
@@ -217,12 +215,12 @@ end
 function ENT:ManageSounds( Active, fThrottle, LimitRPM )
 	local selfTable = self:GetTable()
 	local FlyWheelRPM = self:GetFlyWheelRPM()
-	local Active = Active and (FlyWheelRPM ~= 0)
+	Active = Active and ( FlyWheelRPM ~= 0 )
 	local IdleRPM = self:GetIdleRPM()
 
 	local IsCruise = self:GetIsCruiseModeOn()
 
-	local CurDist = (LocalPlayer():GetPos() - self:GetPos()):Length()
+	local CurDist = ( LocalPlayer():GetPos() - self:GetPos() ):Length()
 	local Throttle = IsCruise and math.Clamp(self:GetThrottle() ^ 3,0.01,0.7) or fThrottle
 	local Gear = self:GetGear()
 	local Clutch = self:GetClutch()
