@@ -232,6 +232,7 @@ local color_simfphys_althudras3 = Color(255,0,0,140)
 
 local color_n_col_off_powerbandend = Color(150, 150, 150, 150)
 local color_n_col_on_powerbandend = Color(255, 255, 255, 255)
+
 local color_n_col_off = Color( 150, 0, 0, 150)
 local color_n_col_on = Color( 255, 0, 0, 255 )
 
@@ -381,8 +382,8 @@ local function drawsimfphysHUD(vehicle,SeatCount)
 			local n_col_off
 
 			if (i < powerbandend) then
-				n_col_off = color_n_col_off
-				n_col_on = color_n_col_on
+				n_col_off = color_n_col_off_powerbandend
+				n_col_on = color_n_col_on_powerbandend
 			else
 				n_col_off = color_n_col_off
 				n_col_on = color_n_col_on
