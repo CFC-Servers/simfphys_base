@@ -752,7 +752,6 @@ hook.Add( "HUDPaint", "simfphys_HUD", function()
 end )
 
 local tipcol = Color( 0, 127, 255, 255 )
-local black = Color( 255, 255, 255, 255 )
 
 hook.Add("HUDPaint", "simfphys_vehicleditorinfo", function()
 	local ply = LocalPlayer()
