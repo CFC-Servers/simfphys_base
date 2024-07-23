@@ -238,14 +238,14 @@ local function drawsimfphysHUD(vehicle,SeatCount)
 
 	if not ShowHud then return end
 
-	if vehicle:GetNWBool( "simfphys_NoHud", false ) then return end
+	if vehicle:GetNW2Bool( "simfphys_NoHud", false ) then return end
 
 	local maxrpm = vehicle:GetLimitRPM()
 	local rpm = vehicle:GetRPM()
 	local throttle = math.Round(vehicle:GetThrottle() * 100,0)
 	local revlimiter = vehicle:GetRevlimiter() and (maxrpm > 2500) and (throttle > 0)
 
-	local SimpleHudIsForced = vehicle:GetNWBool( "simfphys_NoRacingHud", false )
+	local SimpleHudIsForced = vehicle:GetNW2Bool( "simfphys_NoRacingHud", false )
 
 	local powerbandend = math.min(vehicle:GetPowerBandEnd(), maxrpm)
 	local redline = math.max(rpm - powerbandend,0) / (maxrpm - powerbandend)
@@ -577,13 +577,13 @@ local function PaintSeatSwitcher( ent, pSeats, SeatCount )
 
 	draw.NoTexture()
 
-	local MySeat = me:GetVehicle():GetNWInt( "pPodIndex", -1 )
+	local MySeat = me:GetVehicle():GetNW2Int( "pPodIndex", -1 )
 
 	local Passengers = {}
 	for _, ply in pairs( player.GetAll() ) do
 		if ply:GetSimfphys() == ent then
 			local Pod = ply:GetVehicle()
-			Passengers[ Pod:GetNWInt( "pPodIndex", -1 ) ] = ply:GetName()
+			Passengers[ Pod:GetNW2Int( "pPodIndex", -1 ) ] = ply:GetName()
 		end
 	end
 
@@ -618,14 +618,14 @@ local function PaintSeatSwitcher( ent, pSeats, SeatCount )
 	local Offset = -50
 	local yPos = Y - (SeatCount + 1) * 30 - 10
 
-	if me:IsDrivingSimfphys() and (AltHud and not ForceSimpleHud and not ent:GetNWBool( "simfphys_NoRacingHud", false )) then
+	if me:IsDrivingSimfphys() and (AltHud and not ForceSimpleHud and not ent:GetNW2Bool( "simfphys_NoRacingHud", false )) then
 		Offset = -50 + hudoffset_x * screenw
 		yPos = y + radius * 1.2 - (SeatCount + 1) * 30 - 10 + hudoffset_y * screenh
 	end
 
 	for _, Pod in pairs( pSeats ) do
         if not IsValid( Pod ) then continue end
-		local I = Pod:GetNWInt( "pPodIndex", -1 )
+		local I = Pod:GetNW2Int( "pPodIndex", -1 )
 		if I >= 0 then
 			if I == MySeat then
 				draw.RoundedBox(5, X + Offset - HiderOffset, yPos + I * 30, 35 + HiderOffset, 25, Color(127,0,0,100 + 50 * smHider) )

@@ -55,7 +55,7 @@ hook.Add( "PlayerButtonDown", "!!!simfphysButtonDown", function( ply, button )
 		end
 	else
 		for _, Pod in pairs( vehicle:GetPassengerSeats() ) do
-			if IsValid( Pod ) and Pod:GetNWInt( "pPodIndex", 3 ) == simfphys.pSwitchKeys[button] and not IsValid( Pod:GetDriver() ) then
+			if IsValid( Pod ) and Pod:GetNW2Int( "pPodIndex", 3 ) == simfphys.pSwitchKeys[button] and not IsValid( Pod:GetDriver() ) then
 				ply:ExitVehicle()
 
 				timer.Simple( FrameTime(), function()

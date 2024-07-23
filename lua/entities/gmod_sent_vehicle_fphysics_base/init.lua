@@ -1353,7 +1353,7 @@ function ENT:SetOnFire( bOn )
 	if bOn == self:OnFire() then return end
 
 	if hook.Run( "simfphysOnFire", self, bOn ) then return end
-	self:SetNWBool( "OnFire", bOn )
+	self:SetNW2Bool( "OnFire", bOn )
 
 	if bOn then
 		self:DamagedStall()
@@ -1364,7 +1364,7 @@ function ENT:SetOnSmoke( bOn )
 	if bOn == self:OnSmoke() then return end
 
 	if hook.Run( "simfphysOnSmoke", self, bOn ) then return end
-	self:SetNWBool( "OnSmoke", bOn )
+	self:SetN2WBool( "OnSmoke", bOn )
 
 	if bOn then
 		self:DamagedStall()
@@ -1372,27 +1372,27 @@ function ENT:SetOnSmoke( bOn )
 end
 
 function ENT:SetMaxHealth( nHealth )
-	self:SetNWFloat( "MaxHealth", nHealth )
+	self:SetNW2Float( "MaxHealth", nHealth )
 end
 
 function ENT:SetCurHealth( nHealth )
-	self:SetNWFloat( "Health", nHealth )
+	self:SetNW2Float( "Health", nHealth )
 end
 
 function ENT:SetMaxFuel( nFuel )
-	self:SetNWFloat( "MaxFuel", nFuel )
+	self:SetNW2Float( "MaxFuel", nFuel )
 end
 
 function ENT:SetFuel( nFuel )
-	self:SetNWFloat( "Fuel", math.Clamp( nFuel,0,self:GetMaxFuel() ) )
+	self:SetNW2Float( "Fuel", math.Clamp( nFuel,0,self:GetMaxFuel() ) )
 end
 
 function ENT:SetFuelUse( nFuel )
-	self:SetNWFloat( "FuelUse", nFuel )
+	self:SetNW2Float( "FuelUse", nFuel )
 end
 
 function ENT:SetFuelType( fueltype )
-	self:SetNWInt( "FuelType", fueltype )
+	self:SetNW2Int( "FuelType", fueltype )
 end
 
 function ENT:SetFuelPos( vPos )

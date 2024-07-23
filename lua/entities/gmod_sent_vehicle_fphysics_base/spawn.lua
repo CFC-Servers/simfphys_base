@@ -168,7 +168,7 @@ function ENT:InitializeVehicle()
 	self.DriverSeat:Spawn()
 	self.DriverSeat:Activate()
 	self.DriverSeat:SetPos( View.ViewPos + self.DriverSeat:GetUp() * (-34 + self.SeatOffset.z) + self.DriverSeat:GetRight() * (self.SeatOffset.y) + self.DriverSeat:GetForward() * (-6 + self.SeatOffset.x) )
-	self.DriverSeat:SetNWInt( "pPodIndex", 1 )
+	self.DriverSeat:SetNW2Int( "pPodIndex", 1 )
 
 	if View.ID ~= false then
 		self:SetupEnteringAnims()
@@ -224,7 +224,7 @@ function ENT:InitializeVehicle()
 
 			self.pPodKeyIndex = self.pPodKeyIndex and self.pPodKeyIndex + 1 or 2
 
-			self.pSeat[i]:SetNWInt( "pPodIndex", self.pPodKeyIndex )
+			self.pSeat[i]:SetNW2Int( "pPodIndex", self.pPodKeyIndex )
 		end
 	end
 

@@ -96,27 +96,27 @@ function VehicleMeta:IsVehicle()
 end
 
 function ENT:GetCurHealth()
-	return self:GetNWFloat( "Health", self:GetMaxHealth() )
+	return self:GetNW2Float( "Health", self:GetMaxHealth() )
 end
 
 function ENT:GetMaxHealth()
-	return self:GetNWFloat( "MaxHealth", 2000 )
+	return self:GetNW2Float( "MaxHealth", 2000 )
 end
 
 function ENT:GetMaxFuel()
-	return self:GetNWFloat( "MaxFuel", 60 )
+	return self:GetNW2Float( "MaxFuel", 60 )
 end
 
 function ENT:GetFuel()
-	return self:GetNWFloat( "Fuel", self:GetMaxFuel() )
+	return self:GetNW2Float( "Fuel", self:GetMaxFuel() )
 end
 
 function ENT:GetFuelUse()
-	return self:GetNWFloat( "FuelUse", 0 )
+	return self:GetNW2Float( "FuelUse", 0 )
 end
 
 function ENT:GetFuelType()
-	return self:GetNWInt( "FuelType", 1 )
+	return self:GetNW2Int( "FuelType", 1 )
 end
 
 function ENT:GetFuelPos()
@@ -124,19 +124,19 @@ function ENT:GetFuelPos()
 end
 
 function ENT:OnSmoke()
-	return self:GetNWBool( "OnSmoke", false )
+	return self:GetNW2Bool( "OnSmoke", false )
 end
 
 function ENT:OnFire()
-	return self:GetNWBool( "OnFire", false )
+	return self:GetNW2Bool( "OnFire", false )
 end
 
 function ENT:GetBackfireSound()
-	return self:GetNWString( "backfiresound" )
+	return self:GetNW2String( "backfiresound" )
 end
 
 function ENT:SetBackfireSound( the_sound )
-	self:SetNWString( "backfiresound", the_sound )
+	self:SetNW2String( "backfiresound", the_sound )
 end
 
 function ENT:BodyGroupIsValid( bodygroups )
@@ -201,7 +201,7 @@ function ENT:GetSeatAnimation( ply )
 		return -1
 	end
 
-	local pSeatTBL = self.PassengerSeats[ Pod:GetNWInt( "pPodIndex", -1 ) - 1 ]
+	local pSeatTBL = self.PassengerSeats[ Pod:GetNW2Int( "pPodIndex", -1 ) - 1 ]
 
 	if not istable( pSeatTBL ) then return -1 end -- not taking any chances
 
