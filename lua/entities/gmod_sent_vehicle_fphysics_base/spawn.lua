@@ -573,10 +573,13 @@ function ENT:SetupVehicle()
 
 		for i = 1, table.Count( self.Wheels ) do
 			local Ent = self.Wheels[ i ]
-			local PhysObj = Ent:GetPhysicsObject()
+			
+			if IsValid( Ent ) then
+				local PhysObj = Ent:GetPhysicsObject()
 
-			if IsValid( PhysObj ) then
-				PhysObj:EnableMotion( true )
+				if IsValid( PhysObj ) then
+					PhysObj:EnableMotion( true )
+				end
 			end
 		end
 
