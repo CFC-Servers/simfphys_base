@@ -77,20 +77,21 @@ simfphys.wood = CreateConVar( "sv_simfphys_traction_wood", "1", {FCVAR_REPLICATE
 function simfphys.IsCar( ent )
 	if not IsValid( ent ) then return false end
 
-	local IsVehicle = ent:GetClass():lower() == "gmod_sent_vehicle_fphysics_base"
-
-	return IsVehicle
+	return ent:GetClass():lower() == "gmod_sent_vehicle_fphysics_base"
 end
 
 local meta = FindMetaTable( "Player" )
 function meta:IsDrivingSimfphys()
 	if not self:InVehicle() then return false end
 
-	local Car = self:GetSimfphys()
 	local Pod = self:GetVehicle()
+	if not IsValid( Pod ) then return false end
 
-	if not IsValid( Pod ) or not IsValid( Car ) then return false end
-	if not Car.GetDriverSeat or not isfunction( Car.GetDriverSeat ) then return false end
+	local Car = self:GetSimfphys()
+	if not IsValid( Car ) then return false end
+
+	local GetDriverSeat = Car:GetTable().GetDriverSeat
+	if not GetDriverSeat or not isfunction( GetDriverSeat ) then return false end
 
 	return Pod == Car:GetDriverSeat()
 end
@@ -99,24 +100,25 @@ function meta:GetSimfphys()
 	if not self:InVehicle() then return NULL, false end
 
 	local Pod = self:GetVehicle()
-
 	if not IsValid( Pod ) then return NULL, false end
 
-	if Pod.SPHYSchecked == true then
+	local tab = Pod:GetTable()
 
-		return Pod.SPHYSBaseEnt, true
+	if tab.SPHYSchecked == true then
 
-	elseif Pod.SPHYSchecked == nil then
+		return tab.SPHYSBaseEnt, true
+
+	elseif tab.SPHYSchecked == nil then
 
 		local Parent = Pod:GetParent()
 
-		if not IsValid( Parent ) then Pod.SPHYSchecked = false return NULL, false end
+		if not IsValid( Parent ) then tab.SPHYSchecked = false return NULL, false end
 
-		if not simfphys.IsCar( Parent ) then Pod.SPHYSchecked = false return NULL, false end
+		if not simfphys.IsCar( Parent ) then tab.SPHYSchecked = false return NULL, false end
 
-		Pod.SPHYSchecked = true
-		Pod.SPHYSBaseEnt = Parent
-		Pod.vehiclebase = Parent -- compatibility for old addons
+		tab.SPHYSchecked = true
+		tab.SPHYSBaseEnt = Parent
+		tab.vehiclebase = Parent -- compatibility for old addons
 
 		return Parent, true
 	else
