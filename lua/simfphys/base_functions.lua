@@ -90,7 +90,7 @@ function meta:IsDrivingSimfphys()
 	local Car = self:GetSimfphys()
 	if not IsValid( Car ) then return false end
 
-	local GetDriverSeat = Car:GetTable().GetDriverSeat
+	local GetDriverSeat = Car.GetDriverSeat
 	if not GetDriverSeat or not isfunction( GetDriverSeat ) then return false end
 
 	return Pod == Car:GetDriverSeat()
