@@ -493,7 +493,7 @@ local V = {
 		EngineSoundPreset = -1,
 
 		snd_pitch = 1,
-		snd_idle = "simulated_vehicles/v8elite/v8elite_idle.wav",
+		snd_idle = "simulated_vehicles/v8elite/v8elite_idle.mp3",
 
 		snd_low = "simulated_vehicles/v8elite/v8elite_low.wav",
 		snd_low_revdown = "simulated_vehicles/v8elite/v8elite_revdown.wav",
@@ -503,7 +503,7 @@ local V = {
 		snd_mid_gearup = "simulated_vehicles/v8elite/v8elite_second.wav",
 		snd_mid_pitch = 1,
 
-		snd_horn = "simulated_vehicles/horn_4.wav",
+		snd_horn = "simulated_vehicles/horn_4.mp3",
 
 		DifferentialGear = 0.38,
 		Gears = {-0.1,0,0.1,0.18,0.25,0.31,0.40}

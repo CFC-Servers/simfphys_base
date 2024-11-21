@@ -16,11 +16,11 @@ if CLIENT then
 	language.Add( "tool.simfphysmiscsoundeditor.0", "Left click apply settings. Right click copy settings. Reload to reset" )
 	language.Add( "tool.simfphysmiscsoundeditor.1", "Left click apply settings. Right click copy settings. Reload to reset" )
 
-	presets.Add( "simfphys_miscsound", "Horn 0 - Out of my way", { simfphysmiscsoundeditor_HornSound	= "simulated_vehicles/horn_0.wav", } )
+	presets.Add( "simfphys_miscsound", "Horn 0 - Out of my way", { simfphysmiscsoundeditor_HornSound	= "simulated_vehicles/horn_0.mp3", } )
 	presets.Add( "simfphys_miscsound", "Horn 1", { simfphysmiscsoundeditor_HornSound	= "simulated_vehicles/horn_1.wav", } )
 	presets.Add( "simfphys_miscsound", "Horn 2", { simfphysmiscsoundeditor_HornSound	= "simulated_vehicles/horn_2.wav", } )
 	presets.Add( "simfphys_miscsound", "Horn 3", { simfphysmiscsoundeditor_HornSound	= "simulated_vehicles/horn_3.wav", } )
-	presets.Add( "simfphys_miscsound", "Horn 4", { simfphysmiscsoundeditor_HornSound	= "simulated_vehicles/horn_4.wav", } )
+	presets.Add( "simfphys_miscsound", "Horn 4", { simfphysmiscsoundeditor_HornSound	= "simulated_vehicles/horn_4.mp3", } )
 	presets.Add( "simfphys_miscsound", "Horn 5", { simfphysmiscsoundeditor_HornSound	= "simulated_vehicles/horn_5.wav", } )
 	presets.Add( "simfphys_miscsound", "Horn 6 - Vote Daniels", { simfphysmiscsoundeditor_HornSound	= "simulated_vehicles/horn_6.wav", } )
 	presets.Add( "simfphys_miscsound", "Horn 7", { simfphysmiscsoundeditor_HornSound	= "simulated_vehicles/horn_7.wav", } )

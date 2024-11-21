@@ -506,7 +506,7 @@ simfphys.SoundPresets = {
 		1
 	},
 	{
-		"simulated_vehicles/v8elite/v8elite_idle.wav",
+		"simulated_vehicles/v8elite/v8elite_idle.mp3",
 		"simulated_vehicles/v8elite/v8elite_low.wav",
 		"simulated_vehicles/v8elite/v8elite_mid.wav",
 		"simulated_vehicles/v8elite/v8elite_revdown.wav",
